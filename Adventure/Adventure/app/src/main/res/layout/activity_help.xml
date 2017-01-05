@@ -19,12 +19,14 @@
     <TextView
         android:id="@+id/activity_help_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@id/activity_help_image"
         android:text="@string/fistrum"/>
     
     <Button
+        android:id="@+id/activity_help_back_button"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="50dp" />
 
 
