@@ -1,5 +1,7 @@
 package com.cazallau.adventure.Model;
 
+import com.cazallau.adventure.R;
+
 import java.util.LinkedList;
 
 public class MaoGenerator {
@@ -9,12 +11,15 @@ public class MaoGenerator {
     public static void generate(){
         Room room1 = new Room();
         room1.setDescription("Te encuentras en un aula con las contraventanas semicerradas. Olor ha cerebro frito impregna tus sentidos");
+        room1.setImage(R.drawable.room1);
 
         Room room2 = new Room();
         room2.setDescription("Te deslumbra la luz del sol que se filtra por las ventanas del pasillo. Sientes un escalofrio al ver un grajo arrastrándose");
+        room2.setImage(R.drawable.room2);
 
         Room room3 = new Room();
         room3.setDescription("Hay una barra de bar con tapiceria roja pasada de moda. Huele a tabaco");
+        room3.setImage(R.drawable.room3);
 
         //poner a cada habitacion que tiene al lado
         room1.setRoomSouth(room2);

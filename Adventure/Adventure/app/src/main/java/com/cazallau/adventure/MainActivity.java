@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cazallau.adventure.Model.Inventory;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton lookButton;
     ImageButton inventoryButton;
     TextView mainText;
+    ImageView mainImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         lookButton = (ImageButton) findViewById(R.id.activity_main_look_button);
         inventoryButton = (ImageButton) findViewById(R.id.activity_main_inventory_button);
         mainText = (TextView) findViewById(R.id.activity_main_scene_text);
+        mainImage = (ImageView) findViewById(R.id.activity_main_scene_image);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         lookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mainText.setText(currentRoom.print());
             }
         });
 
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mainText.setText(inventory.print());
             }
         });
 
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void repaintScene(){
         mainText.setText(currentRoom.getDescription());
+        mainImage.setImageResource(currentRoom.getImage());
 
         if (currentRoom.getRoomNorth()!= null){
             northButton.setVisibility(View.VISIBLE);

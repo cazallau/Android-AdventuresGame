@@ -8,11 +8,20 @@ public class Room {
 
     private LinkedList<Item> items;
 
+    private int image;
+
     private Room roomNorth;
     private Room roomEast;
     private Room roomWest;
     private Room roomSouth;
 
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
 
     public String getDescription() {
         return description;
@@ -67,6 +76,14 @@ public class Room {
             items = new LinkedList<Item>();
         }
         items.add(item);
+    }
+
+    public String print(){
+        String inventario = new String();
+        for (Item item: items) {
+            inventario = inventario + item.getName() + "\n";
+        }
+        return inventario;
     }
 
 }
