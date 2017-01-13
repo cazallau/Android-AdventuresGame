@@ -35,7 +35,10 @@ public class TakeActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result",position);
+
+                setResult(Activity.RESULT_OK,returnIntent);
                 finish();
 
 

@@ -1,5 +1,6 @@
 package com.cazallau.adventure;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentRoom.getLook().size() != 0) {
                     Intent intent = new Intent(MainActivity.this, TakeActivity.class);
                     intent.putExtra("room", currentRoom.getLook());
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                 } else {
                     mainText.setText("No hay nada en esta habitación");
                 }
@@ -193,10 +194,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-            if (resultCode == RESULT_OK) {
-                System.out.println("hola");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+            if (requestCode == 1) {
+                if(resultCode == Activity.RESULT_OK){
+                    int result = data.getIntExtra("result", -1);
+
+                    System.out.println("position" + result);
+                    Item item = new Item();
+                    item = currentRoom.getItems().get(result);
+                    currentRoom.getItems().remove(result);
+                    inventory.add(item);
+
+                }
+                if (resultCode == Activity.RESULT_CANCELED) {
+                    //Write your code if there's no result
+                }
             }
 
+
+
     }
+
 }
