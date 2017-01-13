@@ -11,9 +11,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DropActivity extends AppCompatActivity {
 
-        ListView list;
+        @BindView(R.id.activity_drop_list) ListView list;
         ArrayList object;
         ArrayAdapter<ArrayList> adapter;
 
@@ -23,10 +26,10 @@ public class DropActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_drop);
+            ButterKnife.bind(this);
 
             object =  getIntent().getExtras().getStringArrayList("room");
 
-            list = (ListView) findViewById(R.id.activity_drop_list);
             adapter =  new ArrayAdapter<>(
                     this,
                     android.R.layout.simple_list_item_1,
