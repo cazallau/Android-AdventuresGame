@@ -23,14 +23,14 @@ public class Inventory {
     }
 
     public String print(){
+
+        if (inventory.size() == 0 ){
+            return "No hay nada en el inventario";
+        }
         String inventario = new String();
 
-        if (inventory.size() != 0) {
-            for (Item item : inventory) {
-                inventario = inventario + item.getName() + "\n";
-            }
-        }else {
-            inventario = "Inventario vacio";
+        for (Item item: inventory) {
+            inventario = inventario + item.getName() + "\n";
         }
         return inventario;
     }
