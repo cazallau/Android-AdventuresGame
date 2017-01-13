@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mainText.setText(currentRoom.print());
+                mainText.setText(currentRoom.getDescription() + "\n" + currentRoom.print());
             }
         });
 
