@@ -14,36 +14,38 @@ import com.cazallau.adventure.Model.Item;
 import com.cazallau.adventure.Model.MaoGenerator;
 import com.cazallau.adventure.Model.Room;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton northButton;
-    ImageButton westButton;
-    ImageButton eastButton;
-    ImageButton southButton;
-    ImageButton helpButton;
-    ImageButton lookButton;
-    ImageButton inventoryButton;
-    TextView mainText;
-    ImageView mainImage;
-    ImageView takeButton;
-    ImageView dropButton;
+    @BindView(R.id.activity_main_north_button) ImageButton northButton;
+
+    @BindView(R.id.activity_main_west_button) ImageButton westButton;
+
+    @BindView(R.id.activity_main_east_button) ImageButton eastButton;
+
+    @BindView(R.id.activity_main_south_button) ImageButton southButton;
+
+    @BindView(R.id.activity_main_help_button) ImageButton helpButton;
+
+    @BindView(R.id.activity_main_look_button) ImageButton lookButton;
+
+    @BindView(R.id.activity_main_inventory_button) ImageButton inventoryButton;
+
+    @BindView(R.id.activity_main_scene_text) TextView mainText;
+
+    @BindView(R.id.activity_main_scene_image) ImageView mainImage;
+
+    @BindView(R.id.activity_main_take_button) ImageButton takeButton;
+
+    @BindView(R.id.activity_main_drop_button) ImageButton dropButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        northButton = (ImageButton) findViewById(R.id.activity_main_north_button);
-        westButton = (ImageButton) findViewById(R.id.activity_main_west_button);
-        eastButton = (ImageButton) findViewById(R.id.activity_main_east_button);
-        southButton = (ImageButton) findViewById(R.id.activity_main_south_button);
-        helpButton = (ImageButton) findViewById(R.id.activity_main_help_button);
-        lookButton = (ImageButton) findViewById(R.id.activity_main_look_button);
-        inventoryButton = (ImageButton) findViewById(R.id.activity_main_inventory_button);
-        mainText = (TextView) findViewById(R.id.activity_main_scene_text);
-        mainImage = (ImageView) findViewById(R.id.activity_main_scene_image);
-        takeButton = (ImageView) findViewById(R.id.activity_main_take_button);
-        dropButton = (ImageView) findViewById(R.id.activity_main_drop_button);
+        ButterKnife.bind(this);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
