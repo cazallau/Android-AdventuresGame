@@ -1,5 +1,6 @@
 package com.cazallau.adventure;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,36 +14,38 @@ import com.cazallau.adventure.Model.Item;
 import com.cazallau.adventure.Model.MaoGenerator;
 import com.cazallau.adventure.Model.Room;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton northButton;
-    ImageButton westButton;
-    ImageButton eastButton;
-    ImageButton southButton;
-    ImageButton helpButton;
-    ImageButton lookButton;
-    ImageButton inventoryButton;
-    TextView mainText;
-    ImageView mainImage;
-    ImageView takeButton;
-    ImageView dropButton;
+    @BindView(R.id.activity_main_north_button) ImageButton northButton;
+
+    @BindView(R.id.activity_main_west_button) ImageButton westButton;
+
+    @BindView(R.id.activity_main_east_button) ImageButton eastButton;
+
+    @BindView(R.id.activity_main_south_button) ImageButton southButton;
+
+    @BindView(R.id.activity_main_help_button) ImageButton helpButton;
+
+    @BindView(R.id.activity_main_look_button) ImageButton lookButton;
+
+    @BindView(R.id.activity_main_inventory_button) ImageButton inventoryButton;
+
+    @BindView(R.id.activity_main_scene_text) TextView mainText;
+
+    @BindView(R.id.activity_main_scene_image) ImageView mainImage;
+
+    @BindView(R.id.activity_main_take_button) ImageButton takeButton;
+
+    @BindView(R.id.activity_main_drop_button) ImageButton dropButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        northButton = (ImageButton) findViewById(R.id.activity_main_north_button);
-        westButton = (ImageButton) findViewById(R.id.activity_main_west_button);
-        eastButton = (ImageButton) findViewById(R.id.activity_main_east_button);
-        southButton = (ImageButton) findViewById(R.id.activity_main_south_button);
-        helpButton = (ImageButton) findViewById(R.id.activity_main_help_button);
-        lookButton = (ImageButton) findViewById(R.id.activity_main_look_button);
-        inventoryButton = (ImageButton) findViewById(R.id.activity_main_inventory_button);
-        mainText = (TextView) findViewById(R.id.activity_main_scene_text);
-        mainImage = (ImageView) findViewById(R.id.activity_main_scene_image);
-        takeButton = (ImageView) findViewById(R.id.activity_main_take_button);
-        dropButton = (ImageView) findViewById(R.id.activity_main_drop_button);
+        ButterKnife.bind(this);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentRoom.getLook().size() != 0) {
                     Intent intent = new Intent(MainActivity.this, TakeActivity.class);
                     intent.putExtra("room", currentRoom.getLook());
-                    startActivity(intent);
+                    startActivityForResult(intent, 1);
                 } else {
                     mainText.setText("No hay nada en esta habitación");
                 }
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 if (inventory.getLook().size() != 0) {
                     Intent intent = new Intent(MainActivity.this, TakeActivity.class);
                     intent.putExtra("room", inventory.getLook());
-                    startActivity(intent);
+                    startActivityForResult(intent, 2);
                 } else {
                     mainText.setText("No hay nada en esta habitación");
                 }
@@ -193,10 +196,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-            if (resultCode == RESULT_OK) {
-                System.out.println("hola");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                int result = data.getIntExtra("result", -1);
+
+                System.out.println("position" + result);
+                Item item = new Item();
+                item = currentRoom.getItems().get(result);
+                currentRoom.getItems().remove(result);
+                inventory.add(item);
+
             }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        if (requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK){
+                int result = data.getIntExtra("result", -1);
+
+                Item item = new Item();
+                item = inventory.getInventory().get(result);
+                inventory.getInventory().remove(result);
+                currentRoom.add(item);
+
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+
+
 
     }
+
 }
