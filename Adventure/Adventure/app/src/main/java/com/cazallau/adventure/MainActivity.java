@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 if (inventory.getLook().size() != 0) {
                     Intent intent = new Intent(MainActivity.this, TakeActivity.class);
                     intent.putExtra("room", inventory.getLook());
-                    startActivity(intent);
+                    startActivityForResult(intent, 2);
                 } else {
                     mainText.setText("No hay nada en esta habitación");
                 }
@@ -196,21 +196,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            if (requestCode == 1) {
-                if(resultCode == Activity.RESULT_OK){
-                    int result = data.getIntExtra("result", -1);
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                int result = data.getIntExtra("result", -1);
 
-                    System.out.println("position" + result);
-                    Item item = new Item();
-                    item = currentRoom.getItems().get(result);
-                    currentRoom.getItems().remove(result);
-                    inventory.add(item);
+                System.out.println("position" + result);
+                Item item = new Item();
+                item = currentRoom.getItems().get(result);
+                currentRoom.getItems().remove(result);
+                inventory.add(item);
 
-                }
-                if (resultCode == Activity.RESULT_CANCELED) {
-                    //Write your code if there's no result
-                }
             }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        if (requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK){
+                int result = data.getIntExtra("result", -1);
+
+                Item item = new Item();
+                item = inventory.getInventory().get(result);
+                inventory.getInventory().remove(result);
+                currentRoom.add(item);
+
+
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
 
 
 

@@ -1,5 +1,7 @@
 package com.cazallau.adventure;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +35,10 @@ public class DropActivity extends AppCompatActivity {
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("result",position);
+
+                    setResult(Activity.RESULT_OK,returnIntent);
                     finish();
                 }
             });
