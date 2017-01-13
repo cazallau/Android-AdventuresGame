@@ -24,8 +24,13 @@ public class Inventory {
 
     public String print(){
         String inventario = new String();
-        for (Item item: inventory) {
-            inventario = inventario + item.getName() + "\n";
+
+        if (inventory.size() != 0) {
+            for (Item item : inventory) {
+                inventario = inventario + item.getName() + "\n";
+            }
+        }else {
+            inventario = "Inventario vacio";
         }
         return inventario;
     }
