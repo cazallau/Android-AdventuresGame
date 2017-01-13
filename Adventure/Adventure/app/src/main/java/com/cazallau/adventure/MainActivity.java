@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton inventoryButton;
     TextView mainText;
     ImageView mainImage;
+    ImageView takeButton;
+    ImageView dropButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         inventoryButton = (ImageButton) findViewById(R.id.activity_main_inventory_button);
         mainText = (TextView) findViewById(R.id.activity_main_scene_text);
         mainImage = (ImageView) findViewById(R.id.activity_main_scene_image);
+        takeButton = (ImageView) findViewById(R.id.activity_main_take_button);
+        dropButton = (ImageView) findViewById(R.id.activity_main_drop_button);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         lookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mainText.setText(currentRoom.print());
             }
         });
@@ -97,14 +102,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        takeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentRoom.getLook().size() != 0) {
+                    Intent intent = new Intent(MainActivity.this, TakeActivity.class);
+                    intent.putExtra("room", currentRoom.getLook());
+                    startActivity(intent);
+                } else {
+                    mainText.setText("No hay nada en esta habitación");
+                }
+            }
+        });
+
+        dropButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (inventory.getLook().size() != 0) {
+                    Intent intent = new Intent(MainActivity.this, TakeActivity.class);
+                    intent.putExtra("room", inventory.getLook());
+                    startActivity(intent);
+                } else {
+                    mainText.setText("No hay nada en esta habitación");
+                }
+            }
+        });
+
         initGame();
 
+
     }
+
 
     Inventory inventory = new Inventory();
     Room currentRoom;
 
-    private void initGame(){
+    private void initGame() {
 
         Item sword = new Item("Sword", "A sharp blade");
         Item pieceOfPaper = new Item("Piece Of Paper", "A blank paper");
@@ -121,41 +154,49 @@ public class MainActivity extends AppCompatActivity {
         repaintScene();
     }
 
-    private void repaintScene(){
+    private void repaintScene() {
         mainText.setText(currentRoom.getDescription());
         mainImage.setImageResource(currentRoom.getImage());
 
-        if (currentRoom.getRoomNorth()!= null){
+        if (currentRoom.getRoomNorth() != null) {
             northButton.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
 
             northButton.setVisibility(View.INVISIBLE);
         }
 
-        if (currentRoom.getRoomSouth()!= null){
+        if (currentRoom.getRoomSouth() != null) {
             southButton.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
 
             southButton.setVisibility(View.INVISIBLE);
         }
 
-        if (currentRoom.getRoomWest()!= null){
+        if (currentRoom.getRoomWest() != null) {
             westButton.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
 
             westButton.setVisibility(View.INVISIBLE);
         }
 
-        if (currentRoom.getRoomEast()!= null){
+        if (currentRoom.getRoomEast() != null) {
             eastButton.setVisibility(View.VISIBLE);
 
-        }else{
+        } else {
 
             eastButton.setVisibility(View.INVISIBLE);
         }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+            if (resultCode == RESULT_OK) {
+                System.out.println("hola");
+            }
 
     }
 }

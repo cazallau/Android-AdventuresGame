@@ -1,5 +1,6 @@
 package com.cazallau.adventure.Model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Inventory {
@@ -7,6 +8,18 @@ public class Inventory {
 
     public Inventory(){
 
+    }
+    public ArrayList getLook() {
+        ArrayList <String> look;
+        look = new ArrayList<>();
+        if (inventory != null) {
+
+            for (Item i : inventory) {
+
+                look.add(i.getName());
+            }
+        }
+        return look;
     }
 
     public String print(){

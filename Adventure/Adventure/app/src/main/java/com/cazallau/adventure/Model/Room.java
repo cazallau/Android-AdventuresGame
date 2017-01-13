@@ -1,6 +1,7 @@
 package com.cazallau.adventure.Model;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Room {
@@ -8,12 +9,28 @@ public class Room {
 
     private LinkedList<Item> items;
 
+
     private int image;
 
     private Room roomNorth;
     private Room roomEast;
     private Room roomWest;
     private Room roomSouth;
+
+
+    public ArrayList getLook() {
+        ArrayList <String> look;
+        look = new ArrayList<>();
+        if (items != null) {
+
+            for (Item i : items) {
+
+                look.add(i.getName());
+            }
+        }
+        return look;
+    }
+
 
     public int getImage() {
         return image;
@@ -80,8 +97,13 @@ public class Room {
 
     public String print(){
         String inventario = new String();
-        for (Item item: items) {
-            inventario = inventario + item.getName() + "\n";
+        if (items != null){
+            for (Item item : items) {
+                inventario = inventario + item.getName() + "\n";
+            }
+        }
+        else {
+            inventario = "No hay nada en esta habitación";
         }
         return inventario;
     }
