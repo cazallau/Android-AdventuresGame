@@ -3,6 +3,7 @@ package com.cazallau.adventure;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -211,6 +212,9 @@ public class MainActivity extends AppCompatActivity {
                 currentRoom.getItems().remove(position);
                 inventory.add(item);
 
+                Snackbar.make(mainText, getString(R.string.taked_item_text) + item.getName(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -224,6 +228,9 @@ public class MainActivity extends AppCompatActivity {
                 item = inventory.getInventory().get(position);
                 inventory.getInventory().remove(position);
                 currentRoom.add(item);
+
+                Snackbar.make(mainText, getString(R.string.dropped_item_text) + item.getName(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
 
             }
