@@ -4,7 +4,7 @@ import com.cazallau.adventure.R;
 
 import java.util.LinkedList;
 
-public class MaoGenerator {
+public class MapGenerator {
 
     public static Room initialRoom;
 

@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cazallau.adventure.StartActivity">
+    tools:context="com.cazallau.adventure.StartActivity"
+    android:background="@drawable/main_background">
 
     <ImageView
         android:id="@+id/activity_start_image"

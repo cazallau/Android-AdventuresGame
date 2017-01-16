@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.cazallau.adventure.Model.Inventory;
 import com.cazallau.adventure.Model.Item;
-import com.cazallau.adventure.Model.MaoGenerator;
+import com.cazallau.adventure.Model.MapGenerator;
 import com.cazallau.adventure.Model.Room;
 
 import butterknife.BindView;
@@ -153,9 +153,9 @@ public class MainActivity extends AppCompatActivity {
         inventory.add(rubberChicken);
 
         //creamos un mapa con todas las room
-        MaoGenerator.generate();
+        MapGenerator.generate();
 
-        currentRoom = MaoGenerator.initialRoom;
+        currentRoom = MapGenerator.initialRoom;
         repaintScene();
     }
 
