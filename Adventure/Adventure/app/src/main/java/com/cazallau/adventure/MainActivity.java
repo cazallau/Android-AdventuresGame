@@ -13,6 +13,7 @@ import com.cazallau.adventure.Model.Inventory;
 import com.cazallau.adventure.Model.Item;
 import com.cazallau.adventure.Model.MapGenerator;
 import com.cazallau.adventure.Model.Room;
+import com.cazallau.adventure.util.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
         dropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (inventory.getLook().size() != 0) {
-                    Intent intent = new Intent(MainActivity.this, TakeActivity.class);
-                    intent.putExtra("room", inventory.getLook());
+                if (inventory.getItemsNames().size() != 0) {
+                    Intent intent = new Intent(MainActivity.this, DropActivity.class);
+                    intent.putExtra(Constants.KEY_INTENT_INVETORY, inventory);
                     startActivityForResult(intent, 2);
-                } else {
+                }else {
                     mainText.setText("No hay nada en esta habitación");
                 }
             }
@@ -202,12 +203,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                int result = data.getIntExtra("result", -1);
+                int position = data.getIntExtra("result", -1);
 
-                System.out.println("position" + result);
+                System.out.println("position" + position);
                 Item item = new Item();
-                item = currentRoom.getItems().get(result);
-                currentRoom.getItems().remove(result);
+                item = currentRoom.getItems().get(position);
+                currentRoom.getItems().remove(position);
                 inventory.add(item);
 
             }
@@ -217,11 +218,11 @@ public class MainActivity extends AppCompatActivity {
         }
         if (requestCode == 2) {
             if(resultCode == Activity.RESULT_OK){
-                int result = data.getIntExtra("result", -1);
+                int position = data.getIntExtra(Constants.KEY_INTENT_DROP_ITEM_POSITION, -1);
 
-                Item item = new Item();
-                item = inventory.getInventory().get(result);
-                inventory.getInventory().remove(result);
+                Item item;
+                item = inventory.getInventory().get(position);
+                inventory.getInventory().remove(position);
                 currentRoom.add(item);
 
 
