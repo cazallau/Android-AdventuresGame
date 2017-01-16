@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="room_desc1">Te encuentras en un aula con las contraventanas semicerradas. Olor ha cerebro frito impregna tus sentidos</string>
+    <string name="room_desc2">Te deslumbra la luz del sol que se filtra por las ventanas del pasillo. Sientes un escalofrio al ver un grajo arrastrándose</string>
+    <string name="room_desc3">Hay una barra de bar con tapiceria roja pasada de moda. Huele a tabaco</string>
+    <string name="room_desc4">Un timon de barco se encuentra en medio de la habitacion rodeado por un charco de sangre</string>
+
+</resources>
