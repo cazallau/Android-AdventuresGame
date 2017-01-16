@@ -13,6 +13,7 @@ import com.cazallau.adventure.Model.Inventory;
 import com.cazallau.adventure.Model.Item;
 import com.cazallau.adventure.Model.MapGenerator;
 import com.cazallau.adventure.Model.Room;
+import com.cazallau.adventure.util.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
         dropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (inventory.getLook().size() != 0) {
-                    Intent intent = new Intent(MainActivity.this, TakeActivity.class);
-                    intent.putExtra("room", inventory.getLook());
+                if (inventory.getItemsNames().size() != 0) {
+                    Intent intent = new Intent(MainActivity.this, DropActivity.class);
+                    intent.putExtra(Constants.KEY_INTENT_INVETORY, inventory);
                     startActivityForResult(intent, 2);
-                } else {
+                }else {
                     mainText.setText("No hay nada en esta habitación");
                 }
             }
