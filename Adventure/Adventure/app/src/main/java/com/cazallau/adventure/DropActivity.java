@@ -40,9 +40,9 @@ public class DropActivity extends AppCompatActivity {
             list.setAdapter(adapter);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View row, int position, long id) {
                     Intent returnIntent = new Intent();
-                    returnIntent.putExtra("result",position);
+                    returnIntent.putExtra(Constants.KEY_INTENT_DROP_ITEM_POSITION,position);
 
                     setResult(Activity.RESULT_OK,returnIntent);
                     finish();
