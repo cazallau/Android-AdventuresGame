@@ -23,6 +23,7 @@ public class MapGenerator {
 
         Room room4 = new Room();
         room4.setDescription("Un timon de barco se encuentra en medio de la habitacion rodeado por un charco de sangre");
+        room4.setImage(R.drawable.room4);
 
 
 
