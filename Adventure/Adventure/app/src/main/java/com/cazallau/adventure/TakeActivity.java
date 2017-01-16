@@ -11,9 +11,12 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TakeActivity extends AppCompatActivity {
 
-    ListView list;
+    @BindView(R.id.activity_take_list) ListView list;
     ArrayList object;
     ArrayAdapter <ArrayList> adapter;
 
@@ -23,10 +26,10 @@ public class TakeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take);
+        ButterKnife.bind(this);
 
         object =  getIntent().getExtras().getStringArrayList("room");
 
-        list = (ListView) findViewById(R.id.activity_take_list);
         adapter =  new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -34,7 +37,7 @@ public class TakeActivity extends AppCompatActivity {
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View row, int position, long id) {
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",position);
 

@@ -4,20 +4,13 @@
     android:id="@+id/activity_drop"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="0dp"
     tools:context="com.cazallau.adventure.DropActivity">
     <ListView
         android:id="@+id/activity_drop_list"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="hola"/>
+        android:layout_height="match_parent">
+
     </ListView>
 
 </RelativeLayout>

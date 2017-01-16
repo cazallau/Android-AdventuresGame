@@ -1,29 +1,36 @@
 package com.cazallau.adventure.Model;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
-public class Inventory {
+public class Inventory implements Serializable{
     private LinkedList<Item> inventory = new LinkedList<>();
 
     public Inventory(){
 
     }
-    public ArrayList getLook() {
-        ArrayList <String> look;
-        look = new ArrayList<>();
+    public List getItemsNames() {
+        List<String> names = new ArrayList<>();
         if (inventory != null) {
 
             for (Item i : inventory) {
 
-                look.add(i.getName());
+                names.add(i.getName());
             }
         }
-        return look;
+        return names;
     }
 
     public String print(){
+
+        if (inventory.size() == 0 ){
+            return "No hay nada en el inventario";
+        }
         String inventario = new String();
+
         for (Item item: inventory) {
             inventario = inventario + item.getName() + "\n";
         }
