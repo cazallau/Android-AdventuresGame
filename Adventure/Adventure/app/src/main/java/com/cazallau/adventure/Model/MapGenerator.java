@@ -1,5 +1,7 @@
 package com.cazallau.adventure.Model;
 
+import android.content.Context;
+
 import com.cazallau.adventure.R;
 
 import java.util.LinkedList;
@@ -8,21 +10,21 @@ public class MapGenerator {
 
     public static Room initialRoom;
 
-    public static void generate(){
+    public static void generate(Context context){
         Room room1 = new Room();
-        room1.setDescription("Te encuentras en un aula con las contraventanas semicerradas. Olor ha cerebro frito impregna tus sentidos");
+        room1.setDescription(context.getString(R.string.room_desc1));
         room1.setImage(R.drawable.room1);
 
         Room room2 = new Room();
-        room2.setDescription("Te deslumbra la luz del sol que se filtra por las ventanas del pasillo. Sientes un escalofrio al ver un grajo arrastrándose");
+        room2.setDescription(context.getString(R.string.room_desc2));
         room2.setImage(R.drawable.room2);
 
         Room room3 = new Room();
-        room3.setDescription("Hay una barra de bar con tapiceria roja pasada de moda. Huele a tabaco");
+        room3.setDescription(context.getString(R.string.room_desc3));
         room3.setImage(R.drawable.room3);
 
         Room room4 = new Room();
-        room4.setDescription("Un timon de barco se encuentra en medio de la habitacion rodeado por un charco de sangre");
+        room4.setDescription(context.getString(R.string.room_desc4));
         room4.setImage(R.drawable.room4);
 
 

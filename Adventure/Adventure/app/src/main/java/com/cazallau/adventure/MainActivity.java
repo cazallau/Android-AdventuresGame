@@ -2,6 +2,8 @@ package com.cazallau.adventure;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.JetPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import com.cazallau.adventure.Model.Item;
 import com.cazallau.adventure.Model.MapGenerator;
 import com.cazallau.adventure.Model.Room;
 import com.cazallau.adventure.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,15 +159,25 @@ public class MainActivity extends AppCompatActivity {
         inventory.add(rubberChicken);
 
         //creamos un mapa con todas las room
-        MapGenerator.generate();
+        MapGenerator.generate(this);
 
         currentRoom = MapGenerator.initialRoom;
         repaintScene();
+
+        JetPlayer jetPlayer = JetPlayer.getJetPlayer();
+        AssetFileDescriptor afd = this.getResources().openRawResourceFd(R.raw.jet);
+        jetPlayer.loadJetFile(afd);
+        byte segmentId = 0;
+// queue segment 0, repeat once, use General MIDI
+        jetPlayer.queueJetSegment(0, -1, 0, 0, 0, (byte) 0);
+        jetPlayer.play();
     }
 
     private void repaintScene() {
         mainText.setText(currentRoom.getDescription());
         mainImage.setImageResource(currentRoom.getImage());
+
+        Picasso.with(this).load("http://www.elrunrun.net/wp-content/uploads/2015/11/fore-660x330.jpg").into(mainImage);
 
         if (currentRoom.getRoomNorth() != null) {
             northButton.setVisibility(View.VISIBLE);
