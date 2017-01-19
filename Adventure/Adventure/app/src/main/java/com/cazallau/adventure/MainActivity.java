@@ -2,6 +2,8 @@ package com.cazallau.adventure;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.JetPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -161,6 +163,14 @@ public class MainActivity extends AppCompatActivity {
 
         currentRoom = MapGenerator.initialRoom;
         repaintScene();
+
+        JetPlayer jetPlayer = JetPlayer.getJetPlayer();
+        AssetFileDescriptor afd = this.getResources().openRawResourceFd(R.raw.jet);
+        jetPlayer.loadJetFile(afd);
+        byte segmentId = 0;
+// queue segment 0, repeat once, use General MIDI
+        jetPlayer.queueJetSegment(0, -1, 0, 0, 0, (byte) 0);
+        jetPlayer.play();
     }
 
     private void repaintScene() {
